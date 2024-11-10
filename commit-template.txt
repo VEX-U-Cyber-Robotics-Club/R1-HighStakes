@@ -1,0 +1,23 @@
+# Commit Message Template
+# -----------------------
+# Title: A short, concise summary of the changes (under 50 characters)
+#
+# Description:
+# A detailed description of what changes were made and why.
+# Explain the motivation behind the change, any background context,
+# and any information that might be helpful for understanding.
+# Wrap all lines at 72 characters for readability.
+#
+# Testing:
+# Mention how the changes were tested (e.g., "Tested locally with [tool/test-case]")
+# or state any relevant test information.
+#
+# References:
+# Include any issue numbers, pull requests, or related tickets
+# (e.g., "Closes #123", "Related to #456").
+#
+# Co-authored-by:
+# Add co-author details if needed (e.g., "Co-authored-by: Name <email@example.com>")
+#
+# -----------------------
+# Lines starting with '#' are comments and will be ignored when the commit is created.
