@@ -45,3 +45,4 @@ TEMPLATE_FILES=$(INCDIR)/$(LIBNAME)/*.h $(INCDIR)/$(LIBNAME)/*.hpp
 ################################################################################
 ########## Nothing below this line should be edited by typical users ###########
 -include ./common.mk
+INCFLAGS += -I./include/subsystemHeaders

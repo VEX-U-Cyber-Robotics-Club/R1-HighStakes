@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/adi.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -92,3 +93,23 @@ void opcontrol() {
 		pros::delay(20);                               // Run for 20 ms then update
 	}
 }
+motor leftMotorA = motor(Port1, false); 
+
+
+//Groups the motors to make them easier to use/code
+pros::MotorGroup leftMotors({1, 2, 3, 4});
+pros::MotorGroup rightMotors({-5, -6, -7, -8});  //Reversed direction
+
+void opcontrol() {
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
+    while (true) {
+        int dir = master.get_analog(ANALOG_LEFT_Y);  // Forward/backward
+        int turn = master.get_analog(ANALOG_RIGHT_X);  // Turning
+
+        leftMotors.move(dir + turn);
+        rightMotors.move(dir - turn);
+
+        pros::delay(20);
+    }
+}
+
