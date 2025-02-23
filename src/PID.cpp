@@ -1,8 +1,9 @@
 #include "main.h"
 #include "motors.h"
+#include "pros/rtos.hpp"
 void pre_autom(void) {
 //Initializing Robot Config DO NOT REMOVE!
-    vexcodeInit();
+vexcodeInit();
 
  //All activities that happen before the competition starts
  //Example: clearing encoders, setting servo positions, etc...
@@ -25,15 +26,27 @@ int totalError;
 //Variables
 bool enableDrivePID = true;
 
-int DrivePID() {
+int DrivePID(int targetPosition) {
+    int sensorPosition = 0;  // Current position of the robot/drivetrain
 
 while(enableDrivePID){
+    sensorPosition = GetSensorPosition(); // Function to get current sensor position (DO THIS)
+     // Calculate error
+    error = targetPosition - sensorPosition;
 
-    prevError = error;
-    vex::task::sleep(20);    //Works with prevError, makes prevError, the Error that was 20ms ago 
+     // Calculate cumulative error
+    totalError += error;
 
+    // Calculate the rate of error change
+    derivative = error - prevError;
+
+    // Calculate control variable (motor power/voltage)
+    int drivePower = Kp * error + Ki * totalError + Kd * derivative;
+
+    // Function to set motor power, assuming function exists (DO THIS)
+    SetMotorPower(drivePower);  
+    prevError = error;   //Works with prevError, makes prevError, the Error that was 20ms ago 
+    pros::delay(20);    
 }
-
-
     return 1;
 }
